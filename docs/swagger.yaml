@@ -1,0 +1,609 @@
+basePath: /api
+definitions:
+  schemas.CreateNerResults:
+    properties:
+      event:
+        type: string
+      location:
+        type: string
+      organization:
+        type: string
+      person:
+        type: string
+      post_id:
+        type: integer
+      report_id:
+        type: integer
+      text_document_id:
+        type: integer
+    type: object
+  schemas.CreateReports:
+    properties:
+      alpha3_code:
+        type: string
+      annotation:
+        type: string
+      author:
+        type: string
+      chained_data:
+        type: string
+      cnt_morphology:
+        type: string
+      images:
+        items:
+          type: string
+        type: array
+      keywords:
+        type: string
+      knowledge_element:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      language_probability:
+        type: number
+      language_ratio:
+        type: number
+      message_code:
+        type: integer
+      mime_type_full:
+        type: string
+      mime_type_short:
+        type: string
+      morphology:
+        type: string
+      path_to_file:
+        type: string
+      path_to_syntax_result:
+        type: string
+      project_name:
+        type: string
+      relevancy_probability:
+        type: string
+      report_name:
+        type: string
+      report_title:
+        type: string
+      route:
+        type: string
+      sending_data_status:
+        type: string
+      source:
+        type: string
+      status_class:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      target_task:
+        type: string
+      text_language:
+        type: string
+      text_relevancy:
+        type: string
+      translate:
+        type: string
+      uuid:
+        type: string
+    required:
+    - author
+    - message_code
+    - project_name
+    - report_name
+    - report_title
+    - source
+    - uuid
+    type: object
+  schemas.HTTPError:
+    properties:
+      detail:
+        example: string
+        type: string
+    type: object
+  schemas.ReadNerResults:
+    properties:
+      event:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      organization:
+        type: string
+      person:
+        type: string
+      post_id:
+        type: integer
+      report_id:
+        type: integer
+      text_document_id:
+        type: integer
+    type: object
+  schemas.ReadReports:
+    properties:
+      alpha3_code:
+        type: string
+      annotation:
+        type: string
+      author:
+        type: string
+      chained_data:
+        type: string
+      cnt_morphology:
+        type: string
+      date:
+        type: string
+      id:
+        type: integer
+      images:
+        items:
+          type: string
+        type: array
+      keywords:
+        type: string
+      knowledge_element:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      language_probability:
+        type: number
+      language_ratio:
+        type: number
+      message_code:
+        type: integer
+      mime_type_full:
+        type: string
+      mime_type_short:
+        type: string
+      morphology:
+        type: string
+      path_to_file:
+        type: string
+      path_to_syntax_result:
+        type: string
+      project_name:
+        type: string
+      relevancy_probability:
+        type: string
+      report_name:
+        type: string
+      report_title:
+        type: string
+      route:
+        type: string
+      sending_data_status:
+        type: string
+      source:
+        type: string
+      status_class:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      target_task:
+        type: string
+      text_language:
+        type: string
+      text_relevancy:
+        type: string
+      translate:
+        type: string
+      uuid:
+        type: string
+    required:
+    - author
+    - message_code
+    - project_name
+    - report_name
+    - report_title
+    - source
+    - uuid
+    type: object
+  schemas.UpdateNerResults:
+    properties:
+      event:
+        type: string
+      location:
+        type: string
+      organization:
+        type: string
+      person:
+        type: string
+      post_id:
+        type: integer
+      report_id:
+        type: integer
+      text_document_id:
+        type: integer
+    type: object
+  schemas.UpdateReports:
+    properties:
+      alpha3_code:
+        type: string
+      annotation:
+        type: string
+      author:
+        type: string
+      chained_data:
+        type: string
+      cnt_morphology:
+        type: string
+      images:
+        items:
+          type: string
+        type: array
+      keywords:
+        type: string
+      knowledge_element:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      language_probability:
+        type: number
+      language_ratio:
+        type: number
+      message_code:
+        type: integer
+      mime_type_full:
+        type: string
+      mime_type_short:
+        type: string
+      morphology:
+        type: string
+      path_to_file:
+        type: string
+      path_to_syntax_result:
+        type: string
+      project_name:
+        type: string
+      relevancy_probability:
+        type: string
+      report_name:
+        type: string
+      report_title:
+        type: string
+      route:
+        type: string
+      sending_data_status:
+        type: string
+      source:
+        type: string
+      status_class:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      target_task:
+        type: string
+      text_language:
+        type: string
+      text_relevancy:
+        type: string
+      translate:
+        type: string
+      uuid:
+        type: string
+    type: object
+host: localhost:7559
+info:
+  contact: {}
+  description: Service for reports and ner results.
+  title: DB service
+  version: "1.0"
+paths:
+  /api/ner_results:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/schemas.ReadNerResults'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Get list of ner results
+      tags:
+      - base
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreateNerResults'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadNerResults'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Add one ner_result
+      tags:
+      - base
+  /api/ner_results/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ner Result ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadNerResults'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Delete one ner result
+      tags:
+      - base
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ner Result ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadNerResults'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Get one ner_result
+      tags:
+      - base
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ner Result ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.UpdateNerResults'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadNerResults'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Edit one ner_Result
+      tags:
+      - base
+  /api/ner_results_upload:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/schemas.CreateNerResults'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Add all ner results
+      tags:
+      - base
+  /api/reports:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/schemas.ReadReports'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Get list of reports
+      tags:
+      - base
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreateReports'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadReports'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Add one report
+      tags:
+      - base
+  /api/reports/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadReports'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Delete one report
+      tags:
+      - base
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadReports'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Get one report
+      tags:
+      - base
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.UpdateReports'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ReadReports'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Edit one report
+      tags:
+      - base
+  /api/reports_upload:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/schemas.CreateReports'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.HTTPError'
+      summary: Add all reports
+      tags:
+      - base
+swagger: "2.0"
